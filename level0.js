@@ -61,7 +61,7 @@ function loadlevel0(){
 	var gun0 = new CompoundGun(1,1,1);//constructor(numslots,basevalue,baseeffect){
 	var cgm0 = new CGMod(1,"+",0,10);//constructor(num,operator,effect,delay){
 
-	var currentlevel = new Warehouse(4000,4000,[spawn0],1,[floor0,crate0,bouncyblock0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
+	var currentlevel = new Warehouse(4000,4000,[0],1,[floor0,crate0,bouncyblock0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
 	currentlevel.itboxes = [itemgun2,itemgun3,itemgun4,itemhp20];
 	var sprinklex1 = 1000;
 	var sprinkledx = 500;
@@ -82,13 +82,13 @@ function loadlevel0(){
 	currentlevel.bmboxes.push(bulletmod2);
 	currentlevel.bmboxes.push(bulletmod3);
 	var minsizex = 100;
-	var maxsizex = 400;
+	var maxsizex = 200;
 	var miny = 0;
-	var maxy = 200;
+	var maxy = 64;
 	var ythick = 128
 	var xpointer = 0
 	var i=0;
-	while(i<128){
+	while(i<64){
 		var asize = minsizex+Math.floor((maxsizex-minsizex)*Math.random());
 		var ay = miny + Math.floor((maxy-miny)*Math.random());
 		var abox = new Umb(xpointer+asize,ay+ythick,asize,ythick,0,1);

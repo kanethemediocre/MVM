@@ -72,7 +72,12 @@ class Umb{
 				else {
 					this.x = this.x - overlapx;
 					}
-				this.vx = 0;
+				if ((this.solid==2)||(that.solid==2)){//solid==2 is elastic material
+					this.vx = -1*this.vx;
+					}
+				else{
+					this.vx = 0;
+					}
 				}
 			}
 		else{//resolve by modifying y
@@ -83,7 +88,12 @@ class Umb{
 				this.y = this.y - overlapy;
 				this.grounded = true;
 				}
-			this.vy = 0;
+			if ((this.solid==2)||(that.solid==2)){//solid==2 is elastic material
+				this.vy = -1*this.vy;
+				}
+			else{
+				this.vy = 0;
+				}
 			}						
 		}
 	drag(){

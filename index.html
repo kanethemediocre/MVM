@@ -92,7 +92,15 @@ window.mobileAndTabletCheck = function() {//stolen via stackoverflow allegedly f
 	var boxmodei = 0;
 	var boxmodes = ["Terrain","Enemy","Bullet Modifier","Motion Modifier","Item"];
 	var edithp = 4;
-	
+	var editoperatori = 0;
+	var editoperators = ["+","-","*","/","^"];
+	var edititemi = 0;
+	var edititems = ["g1","g2","g3","g4","hp20"];
+	var editais = ["none","randomwalk","randomhop","randomwalkandhop","randomwalkwithhop","left","right"];
+	var editaii = 0;
+	var editsolid = 1;
+	var editdiri = 0
+	var editdirs = ["up","down","left","right"];
 var savetestlevel = loadlevel0();//new Warehouse(4000,4000,[spawn0],1,[floor0,crate0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
 var savetestlist = savetestlevel.saveaslist();
 

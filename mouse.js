@@ -10,6 +10,7 @@ function mouseDownHandler(e) {
 	if (editmode){
 		editx1 = mx + viewx;
 		edity1 = my + viewy;
+		
 		}
 	}
 document.addEventListener("mouseup", mouseUpHandler, false);
@@ -27,27 +28,48 @@ function mouseUpHandler(e) {
 		var newbox = new Umb(xcenter,ycenter,xsize,ysize,edithp,1);
 		newbox.c = editcolors[editcolori];
 		if (boxmodei==0){
+			newbox.solid = editsolid;
 			currentlevel.srboxes.push(newbox);
 			}
 		else if (boxmodei==1){
-			newbox.ai="randomwalk";
+			newbox.ai=editais[editaii];
 			newbox.publiclabel = newbox.hp;
 			currentlevel.mrboxes.push(newbox);
 			
 			}
 		else if (boxmodei==2){
-			newbox.label = "+";
+			newbox.label = editoperators[editoperatori];
 			newbox.publiclabel = newbox.label + " " + newbox.hp;
 			currentlevel.bmboxes.push(newbox);
 			}
 		else if (boxmodei==3){
-			newbox.publiclabel = "^";
+			//do direction stuff
+			if (editdiri==0){
+				newbox.publiclabel = "^";
+				newbox.xdir = 0;
+				newbox.ydir = -1;
+				}
+			if (editdiri==1){
+				newbox.publiclabel = "v";
+				newbox.xdir = 0;
+				newbox.ydir = 1;
+				}
+			if (editdiri==2){
+				newbox.publiclabel = ">";
+				newbox.xdir = 1;
+				newbox.ydir = 0;
+				}
+			if (editdiri==3){
+				newbox.publiclabel = "<";
+				newbox.xdir = -1;
+				newbox.ydir = 0;
+				}
 			currentlevel.mmboxes.push(newbox);
 			
 			}
 		else if (boxmodei==4){
-			newbox.label = "hp20";
-			newbox.publiclabel = "+20";
+			newbox.label = edititems[edititemi];
+			newbox.publiclabel = edititems[edititemi];//make this better, public facing description
 			currentlevel.itboxes.push(newbox);
 			}
 		//console.log(newbox.xs+" "+newbox.ys);

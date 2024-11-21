@@ -32,10 +32,11 @@ class CompoundGun{
 		}
 	fire(x,y,vx,vy, dir){//might become a character action to avoid these references
 		this.timer = this.basedelay;
+		var speed = 6;
 		if (this.baseeffect=="|"){
 			var newbullet = new Umb(x,y,12,12,this.answer,1);//constructor(xx,yy,xxs,yys,hp,solid){
 			newbullet.x = newbullet.x+64*dir;
-			newbullet.vx = vx+dir*4;
+			newbullet.vx = vx+dir*speed;
 			newbullet.label = "0";
 			newbullet.publiclabel = newbullet.hp;
 			return [newbullet];
@@ -49,7 +50,7 @@ class CompoundGun{
 				var ay = y - halfspread + dy*i
 				var newbullet = new Umb(x,ay,12,12,this.answer,1);//constructor(xx,yy,xxs,yys,hp,solid){
 				newbullet.x = newbullet.x+64*dir;
-				newbullet.vx = vx+dir*4;
+				newbullet.vx = vx+dir*speed;
 				newbullet.label = "0";
 				newbullet.publiclabel = newbullet.hp;
 				bullets.push(newbullet);
@@ -68,8 +69,8 @@ class CompoundGun{
 				var ay =  -1*dy*((this.basenum-1)/2)+dy*i;
 				var newbullet = new Umb(x,y+ay,12,12,this.answer,1);//constructor(xx,yy,xxs,yys,hp,solid){
 				newbullet.x = newbullet.x+64*dir;
-				newbullet.vx = vx+(dir*4)*Math.cos(atheta);
-				newbullet.vy = 4*Math.sin(atheta);
+				newbullet.vx = vx+(dir*speed)*Math.cos(atheta);
+				newbullet.vy = speed*Math.sin(atheta);
 				newbullet.label = "0";
 				newbullet.publiclabel = newbullet.hp;
 				bullets.push(newbullet);

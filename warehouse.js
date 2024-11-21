@@ -186,7 +186,8 @@ class Warehouse{
 					var totalys = this.mrboxes[i].ys+this.mmboxes[j].ys;
 					var dy = this.mrboxes[i].y-this.mmboxes[j].y;
 					if (Math.abs(dy)<totalys){//A collision happened!
-						this.mrboxes[i].vy = this.mrboxes[i].vy - this.mmboxes[j].hp;//hp is used to define acceleration here.  It's fine.
+						this.mrboxes[i].vx = this.mrboxes[i].vx + this.mmboxes[j].hp*this.mmboxes[j].xdir;
+						this.mrboxes[i].vy = this.mrboxes[i].vy + this.mmboxes[j].hp*this.mmboxes[j].ydir;//hp is used to define acceleration here.  It's fine.
 						//need to add provision for more diverse movement modifiers
 						}
 					}
@@ -323,8 +324,8 @@ class Warehouse{
 					var totalys = this.bboxes[i].ys+this.mmboxes[j].ys;
 					var dy = this.bboxes[i].y-this.mmboxes[j].y;
 					if (Math.abs(dy)<totalys){//Bullet is in motion modifier box
-						this.bboxes[i].vy = this.bboxes[i].vy + this.mmboxes[i].hp;//hp is used to define acceleration here.  It's fine.
-						//need to add provision for more diverse movement modifiers
+						this.bboxes[i].vx = this.bboxes[i].vx + this.mmboxes[j].hp*this.mmboxes[j].xdir;
+						this.bboxes[i].vy = this.bboxes[i].vy + this.mmboxes[j].hp*this.mmboxes[j].ydir;//hp is used to define acceleration here.  It's fine.
 						}
 					}
 				j++;

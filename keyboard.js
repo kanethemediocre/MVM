@@ -17,11 +17,17 @@ window.addEventListener("keydown", function (event) {
 			editcolori = 0;
 			}
 		}
-	if (event.key=="b"){
+	if (event.key=="z"){
 		boxmodei++;
 		if (boxmodei>=boxmodes.length){
 			boxmodei = 0;
 			}
+		}
+	if (event.key=="s"){
+		console.log(currentlevel.saveaslist()+" ");
+		}
+	if (event.key=="l"){
+		console.log(currentlevel.srboxes[0].saveaslist()+" ");
 		}
 	if ((event.key=="+")||(event.key=="=")){
 		edithp++;
@@ -31,6 +37,40 @@ window.addEventListener("keydown", function (event) {
 		if (edithp<0){
 			edithp = 0;
 			}
+		}
+	if (event.key=="x"){
+		if (boxmodei==1){
+			editaii++;
+			if (editaii>=editais.length){
+				editaii = 0;
+				}			
+			}
+		else if (boxmodei==2){
+			editoperatori++;
+			if (editoperatori>=editoperators.length){
+				editoperatori = 0;
+				}
+			}
+		else if (boxmodei==3){
+			editdiri++;
+			if (editdiri>=editdirs.length){
+				editdiri = 0;
+				}
+			}
+		else if (boxmodei==4){
+			edititemi++;
+			if (edititemi>=edititems.length){
+				edititemi = 0;
+				}
+			}
+		}
+	if (event.key=="v"){
+		//if (boxmodei==1){
+			editsolid++;
+			if (editsolid>=3){
+				editsolid = 0;
+				}			
+			//}
 		}
   event.preventDefault();// Cancel the default action to avoid it being handled twice
 }, true);	//end of event key handling, not clear what the ", true);" is about		
