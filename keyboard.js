@@ -8,6 +8,30 @@ window.addEventListener("keydown", function (event) {
 	else {
 		keyspressed.push(event.key);
 		}	
+	if (event.key=="`"){
+		editmode = !editmode;
+		}
+	if (event.key=="c"){
+		editcolori++;
+		if (editcolori>=editcolors.length){
+			editcolori = 0;
+			}
+		}
+	if (event.key=="b"){
+		boxmodei++;
+		if (boxmodei>=boxmodes.length){
+			boxmodei = 0;
+			}
+		}
+	if ((event.key=="+")||(event.key=="=")){
+		edithp++;
+		}
+	if (event.key=="-"){
+		edithp--;
+		if (edithp<0){
+			edithp = 0;
+			}
+		}
   event.preventDefault();// Cancel the default action to avoid it being handled twice
 }, true);	//end of event key handling, not clear what the ", true);" is about		
 

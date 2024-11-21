@@ -186,9 +186,8 @@ class Warehouse{
 					var totalys = this.mrboxes[i].ys+this.mmboxes[j].ys;
 					var dy = this.mrboxes[i].y-this.mmboxes[j].y;
 					if (Math.abs(dy)<totalys){//A collision happened!
-						this.mrboxes[i].vy = this.mrboxes[i].vy + this.mmboxes[i].hp;//hp is used to define acceleration here.  It's fine.
+						this.mrboxes[i].vy = this.mrboxes[i].vy - this.mmboxes[j].hp;//hp is used to define acceleration here.  It's fine.
 						//need to add provision for more diverse movement modifiers
-
 						}
 					}
 				j++;
@@ -364,6 +363,14 @@ class Warehouse{
 			//console.log("itriedtodrawmrboxes");
 			this.bmboxes[i].drawboxoutline(viewx,viewy);
 			this.bmboxes[i].drawlabel(viewx,viewy);
+			//console.log(this.bboxes[i].publiclabel);
+			i++;
+			}	
+		var i=0;
+		while(i<this.mmboxes.length){
+			//console.log("itriedtodrawmrboxes");
+			this.mmboxes[i].drawboxoutline(viewx,viewy);
+			this.mmboxes[i].drawlabel(viewx,viewy);
 			//console.log(this.bboxes[i].publiclabel);
 			i++;
 			}	

@@ -15,8 +15,10 @@
 <script type="text/javascript" src="compoundgun.js"></script>
 <script type="text/javascript" src="cgmod.js"></script>
 <script type="text/javascript" src="level0.js"></script>
+<script type="text/javascript" src="level1.js"></script>
 <script type="text/javascript" src="keyboard.js"></script>
 <script type="text/javascript" src="mouse.js"></script>
+<script type="text/javascript" src="edithud.js"></script>
 <script>
 
 // declare global variables/////////////////////////////////////////////////
@@ -85,6 +87,11 @@ window.mobileAndTabletCheck = function() {//stolen via stackoverflow allegedly f
 	var mousestate = 0;
 	var viewx = 0;
 	var viewy = 0;
+	var editcolors = ["red","orange","yellow","green","blue","purple","white","black"];
+	var editcolori = 0;
+	var boxmodei = 0;
+	var boxmodes = ["Terrain","Enemy","Bullet Modifier","Motion Modifier","Item"];
+	var edithp = 4;
 	
 var savetestlevel = loadlevel0();//new Warehouse(4000,4000,[spawn0],1,[floor0,crate0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
 var savetestlist = savetestlevel.saveaslist();
@@ -106,6 +113,23 @@ function update() {
 	viewy = currentlevel.mrboxes[0].y-canvas.height/2;
 	var myplayerbox = currentlevel.mrboxes[0] 
 	//input taken in keyboard.js, handled here
+	/*
+	if (keyspressed.includes("`")){
+		editmode = !editmode;
+		}
+	if (keyspressed.includes("c")){
+		editcolori++;
+		if (editcolori>=editcolors.length){
+			editcolori = 0;
+			}
+		}
+	if (keyspressed.includes("b")){
+		//change box mode
+		}
+	if (keyspressed.includes("h")){
+		//change hp
+		}
+	*/
 	if (keyspressed.includes("w")){
 		if (myplayerbox.grounded){
 			var jump = 32;
@@ -147,6 +171,9 @@ function update() {
 	currentlevel.collideall();
 	//console.log(player0.y);
 	currentlevel.drawall(viewx,viewy);
+	if (editmode){
+		edithud();
+		}
 	if(time%2==0){
 		var truetime = Math.floor((Date.now()/1000)*60);;
 		var servertime = time;
