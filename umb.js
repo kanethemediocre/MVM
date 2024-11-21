@@ -54,9 +54,9 @@ class Umb{
 	collide(that){//checks for collision between to umb s
 		var adx = Math.abs(this.x - that.x);
 		var ady = Math.abs(this.y - that.y);
-		var totalsx = this.sx+that.sx;
-		var totalsy = this.sy+that.sy;
-		if ((adx<totalsx) && (ady<totalsx)){ return true; }
+		var totalxs = this.xs+that.xs;
+		var totalys = this.ys+that.ys;
+		if ((adx<totalxs) && (ady<totalys)){ return true; }
 		else { return false; }
 		}
 	terraincollide(that){//assumes collision is happening

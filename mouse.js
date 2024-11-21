@@ -65,12 +65,59 @@ function mouseUpHandler(e) {
 				newbox.ydir = 0;
 				}
 			currentlevel.mmboxes.push(newbox);
-			
 			}
 		else if (boxmodei==4){
 			newbox.label = edititems[edititemi];
 			newbox.publiclabel = edititems[edititemi];//make this better, public facing description
 			currentlevel.itboxes.push(newbox);
+			}
+		else if (boxmodei==5){//This is delete mode
+			var i=0;
+			while(i<currentlevel.srboxes.length){
+				if (newbox.collide(currentlevel.srboxes[i])){
+					currentlevel.srboxes.splice(i,1);
+					}
+				else{
+					i++;
+					}
+				}
+			var i=0;
+			while(i<currentlevel.mrboxes.length){
+				if (newbox.collide(currentlevel.mrboxes[i])){
+					currentlevel.mrboxes.splice(i,1);
+					}
+				else{
+					i++;
+					}
+				}
+			var i=0;
+			while(i<currentlevel.bmboxes.length){
+				if (newbox.collide(currentlevel.bmboxes[i])){
+					currentlevel.bmboxes.splice(i,1);
+					}
+				else{
+					i++;
+					}
+				}
+			var i=0;
+			while(i<currentlevel.mmboxes.length){
+				if (newbox.collide(currentlevel.mmboxes[i])){
+					currentlevel.mmboxes.splice(i,1);
+					}
+				else{
+					i++;
+					}
+				}
+			var i=0;
+			while(i<currentlevel.itboxes.length){
+				if (newbox.collide(currentlevel.itboxes[i])){
+					currentlevel.itboxes.splice(i,1);
+					}
+				else{
+					i++;
+					}
+				}
+
 			}
 		//console.log(newbox.xs+" "+newbox.ys);
 		}

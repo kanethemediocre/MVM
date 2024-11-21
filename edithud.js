@@ -14,7 +14,7 @@ function edithud(){
 	context.fillText("` Edit Mode On",25,16);
 
 	context.font = "16px Arial";
-	context.fillText("z Adding "+boxmodes[boxmodei],25,64);
+	context.fillText("z "+boxmodes[boxmodei]+" Mode",25,64);
 	
 	context.font = "16px Arial";
 	context.fillText("c Color is "+editcolors[editcolori],25,96);
