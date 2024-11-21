@@ -65,12 +65,15 @@ window.addEventListener("keydown", function (event) {
 			}
 		}
 	if (event.key=="v"){
-		//if (boxmodei==1){
+		if (boxmodei==1){
 			editsolid++;
 			if (editsolid>=3){
 				editsolid = 0;
 				}			
-			//}
+			}
+		}
+	if (event.key=="b"){
+		console.log(currentlevel.saveasjs());
 		}
   event.preventDefault();// Cancel the default action to avoid it being handled twice
 }, true);	//end of event key handling, not clear what the ", true);" is about		

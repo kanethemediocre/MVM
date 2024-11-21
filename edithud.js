@@ -47,6 +47,8 @@ function edithud(){
 		context.font = "16px Arial";
 		context.fillText("x Item is "+edititems[edititemi],25,192);
 		}
+	context.font = "16px Arial";
+	context.fillText("b to save javascript to console",25,256);
 	}
 /*
 	var editcolors = ["red","orange","yellow","green","blue","purple","white","black"];

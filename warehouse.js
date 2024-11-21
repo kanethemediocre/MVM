@@ -51,6 +51,47 @@ class Warehouse{
 		var list = [this.xs,this.ys,this.spawns,this.gravity,srboxeslist,mrboxeslist,bboxeslist,bmboxeslist,mmboxeslist,itboxeslist];
 		return list;
 		}
+	saveasjs(){
+		var level = "function loadlevel9(){ \n var alevel = new Warehouse("+this.xs+","+this.ys+","+this.spawns+","+this.gravity+",[],[]); \n ";
+		var i=0;
+		while(i<this.srboxes.length){
+			level=level+this.srboxes[i].saveasjs();
+			level = level + "alevel.srboxes.push(it); \n ";
+			i++;
+			}
+		var i=0;
+		while(i<this.mrboxes.length){
+			level=level+this.mrboxes[i].saveasjs();
+			level = level + "alevel.mrboxes.push(it); \n ";
+			i++;
+			}
+		var i=0;
+		while(i<this.bboxes.length){
+			level=level+this.bboxes[i].saveasjs();
+			level = level + "alevel.bboxes.push(it); \n ";
+			i++;
+			}
+		var i=0;
+		while(i<this.bmboxes.length){
+			level=level+this.bmboxes[i].saveasjs();
+			level = level + "alevel.bmboxes.push(it); \n ";
+			i++;
+			}
+		var i=0;
+		while(i<this.mmboxes.length){
+			level=level+this.mmboxes[i].saveasjs();
+			level = level + "alevel.mmboxes.push(it); \n ";
+			i++;
+			}
+		var i=0;
+		while(i<this.itboxes.length){
+			level=level+this.itboxes[i].saveasjs();
+			level = level + "alevel.itboxes.push(it); \n ";
+			i++;
+			}
+		var level = level + "return alevel; \n }";
+		return level;
+		}
 	restorefromlist(list){
 		this.xs = list[0];
 		this.ys = list[1];

@@ -107,11 +107,13 @@ function loadlevel0(){
 		i++;
 		}
 	//y u no work bruh	
-	currentlevel.addstairs(-500,-500,500,500,20,"orange");//	addstairs(x1,y1,x2,y2,stairdy,color){
+	//currentlevel.addstairs(-500,-500,500,500,20,"orange");//	addstairs(x1,y1,x2,y2,stairdy,color){
 		
 		//addstairs(x1,y1,x2,y2,stairdy,color){
 			
 			// and y u no work either
+			
+	/*		
 		var x1 = 0;
 		var x2 = 500;
 		var y1 = 0;
@@ -131,6 +133,7 @@ function loadlevel0(){
 			i++;
 			}
 		//}	
+		*/
 		
 		
 		

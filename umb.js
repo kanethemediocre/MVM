@@ -23,6 +23,12 @@ class Umb{
 	saveaslist(){
 		return [this.x,this.y,this.vx,this.vy,this.xs,this.ys,this.hp,this.maxhp,this.timer,this.maxtimer,this.solid,this.c,this.label,this.publiclabel,this.lc,this.grounded,this.xdir,this.ydir,this.ai];
 		}
+	saveasjs(){
+		var thecode = "var it = new Umb("+this.x+","+this.y+","+this.xs+","+this.ys+","+this.maxhp+","+this.solid+");  \n it.vx="+this.vx+";\n it.vy="+this.vy+";\n "
+		thecode = thecode+"it.maxtimer="+this.maxtimer+"; \n it.c='"+this.c+"'; \n it.label='"+this.label+"'; \n it.publiclabel='"+this.publiclabel+"'; \n";
+		thecode = thecode+"it.grounded="+this.grounded+"; \n it.xdir="+this.xdir+"; \n it.ydir="+this.ydir+"; \n it.ai='"+this.ai+"'; \n";
+		return thecode;
+	}
 	restorefromlist(list){
 		this.x = list[0];
 		this.y = list[1];

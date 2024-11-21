@@ -16,6 +16,7 @@
 <script type="text/javascript" src="cgmod.js"></script>
 <script type="text/javascript" src="level0.js"></script>
 <script type="text/javascript" src="level1.js"></script>
+<script type="text/javascript" src="level9.js"></script>
 <script type="text/javascript" src="keyboard.js"></script>
 <script type="text/javascript" src="mouse.js"></script>
 <script type="text/javascript" src="edithud.js"></script>
@@ -101,8 +102,11 @@ window.mobileAndTabletCheck = function() {//stolen via stackoverflow allegedly f
 	var editsolid = 1;
 	var editdiri = 0
 	var editdirs = ["up","down","left","right"];
+	var saving = false;
+
 var savetestlevel = loadlevel0();//new Warehouse(4000,4000,[spawn0],1,[floor0,crate0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
 var savetestlist = savetestlevel.saveaslist();
+
 
 var currentlevel = new Warehouse(4000,4000,[],1,[],[]);//all these values are getting overridden
 currentlevel.restorefromlist(savetestlist);
@@ -120,6 +124,7 @@ function update() {
 	viewx = currentlevel.mrboxes[0].x-canvas.width/2;
 	viewy = currentlevel.mrboxes[0].y-canvas.height/2;
 	var myplayerbox = currentlevel.mrboxes[0] 
+
 	//input taken in keyboard.js, handled here
 	/*
 	if (keyspressed.includes("`")){
