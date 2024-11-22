@@ -21,7 +21,6 @@ function loadlevel0(){
 		var enemy0 = new Umb(100,-120,40,100,4,1);
 		enemy0.c = "red";
 		enemy0.publiclabel = enemy0.hp;
-		
 		i++;
 		}
 	
