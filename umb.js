@@ -28,7 +28,21 @@ class Umb{
 		thecode = thecode+"it.maxtimer="+this.maxtimer+"; \n it.c='"+this.c+"'; \n it.label='"+this.label+"'; \n it.publiclabel='"+this.publiclabel+"'; \n";
 		thecode = thecode+"it.grounded="+this.grounded+"; \n it.xdir="+this.xdir+"; \n it.ydir="+this.ydir+"; \n it.ai='"+this.ai+"'; \n";
 		return thecode;
-	}
+		}
+	savecopy(){
+		var copy = new Umb(this.x,this.y,this.xs,this.ys,this.maxhp,this.solid);
+		copy.hp = this.hp;
+		copy.timer = this.timer;
+		copy.maxtimer = this.maxtimer;
+		copy.c = this.c;
+		copy.label = this.label;
+		copy.publiclabel = this.publiclabel;
+		copy.lc = this.lc;
+		copy.xdir = this.xdir;
+		copy.ydir = this.ydir;
+		copy.ai = this.ai;
+		return copy;
+		}
 	restorefromlist(list){
 		this.x = list[0];
 		this.y = list[1];

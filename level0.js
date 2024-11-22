@@ -98,44 +98,15 @@ function loadlevel0(){
 		//console.log("asize "+asize+" ay "+ay+" xpointer "+xpointer);
 		i++;
 		}	
-	var stairnum = 12;
-	var stairdy = 20;
-	var stairdx = 20;
-	var i=0;
-	while(i<stairnum){//this one works
-		currentlevel.srboxes.push(new Umb(stairdx*i+1000, -1*stairdy*i+stairdy*stairnum-120, stairdx, stairdy ,0 ,1 ));////constructor(xx,yy,xxs,yys,hp,solid)
-		i++;
-		}
-	//y u no work bruh	
-	//currentlevel.addstairs(-500,-500,500,500,20,"orange");//	addstairs(x1,y1,x2,y2,stairdy,color){
 		
-		//addstairs(x1,y1,x2,y2,stairdy,color){
-			
-			// and y u no work either
-			
-	/*		
-		var x1 = 0;
-		var x2 = 500;
-		var y1 = 0;
-		var y2 = 500;	
-		var stairdy = 20;
-		var color = "orange";		
-		var dx = x2-x1;
-		var dy = y2-y1;
-		var stairnum = Math.floor(dy/stairdy);
-		var stairdx = Math.floor(dx/stairnum);
-		var i=0;
-		while(i<stairnum){
-			var nextstair = new Umb(stairdx*i+x1, stairdy*i+y1, stairdx, stairdy ,0 ,1 );//constructor(xx,yy,xxs,yys,hp,solid)
-			nextstair.c = color;
-			currentlevel.srboxes.push(new Umb(nextstair));
-			console.log(nextstair.x+" "+nextstair.y,currentlevel.srboxes.length);
-			i++;
-			}
-		//}	
-		*/
+
+
+	currentlevel.addline(2000,-160,2500,-600,32,"red");
+	
+	currentlevel.addline(2500,-160,3000,-600,32,"purple");//addline(x1,y1,x2,y2,stairnum,staircolor){ //Essentially a staircase of boxes, from point 1 to point 2.
+
 		
-		
+	currentlevel.xmirror(-1000);	
 		
 	return currentlevel;
 	}

@@ -48,16 +48,8 @@ function edithud(){
 		context.fillText("x Item is "+edititems[edititemi],25,192);
 		}
 	context.font = "16px Arial";
-	context.fillText("b to save javascript to console",25,256);
+	context.fillText("b to save level to console as js",25,256);
+	
+	context.font = "16px Arial";
+	context.fillText("l to change level (0-10)",25,288);
 	}
-/*
-	var editcolors = ["red","orange","yellow","green","blue","purple","white","black"];
-	var editcolori = 0;
-	var boxmodei = 0;
-	var boxmodes = ["Terrain","Enemy","Bullet Modifier","Motion Modifier","Item"];
-	var edithp = 4;
-	var editoperatori = 0;
-	var editoperators = ["+","-","*","/","^"];
-	var edititemi = 0;
-	var edititems = ["g1","g2","g3","g4","hp20"];
-*/

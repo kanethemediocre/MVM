@@ -173,6 +173,29 @@ class Warehouse{
 					this.mrboxes[i].xdir = Math.floor(Math.random()*3) - 1;//-1, 0, or 1
 					}
 				}
+			if (this.mrboxes[i].ai=="randomhop"){
+				//console.log(this.mrboxes[i].xdir);
+				//this.mrboxes[i].vx = this.mrboxes[i].vx + this.mrboxes[i].xdir*0.5;
+				if ((time+i)%20==0){
+					console.log(this.mrboxes[i].vy);
+					this.mrboxes[i].vy = this.mrboxes[i].vy-12;//-1, 0, or 1
+					//this.mrboxes[i].y = this.mrboxes[i].y-120;//
+					}
+				}
+			if (this.mrboxes[i].ai=="left"){
+				//console.log(this.mrboxes[i].xdir);
+				//this.mrboxes[i].vx = this.mrboxes[i].vx + this.mrboxes[i].xdir*0.5;
+				if ((time+i)%10==0){
+					this.mrboxes[i].vx = this.mrboxes[i].vx-6;//-1, 0, or 1
+					}
+				}
+			if (this.mrboxes[i].ai=="right"){
+				//console.log(this.mrboxes[i].xdir);
+				//this.mrboxes[i].vx = this.mrboxes[i].vx + this.mrboxes[i].xdir*0.5;
+				if ((time+i)%10==0){
+					this.mrboxes[i].vx= this.mrboxes[i].vx+6;//-1, 0, or 1
+					}
+				}
 	
 			i++;
 			}
@@ -422,6 +445,84 @@ class Warehouse{
 			this.itboxes[i].drawboxoutline(viewx,viewy);
 			this.itboxes[i].drawlabel(viewx,viewy);
 			//console.log(this.bboxes[i].publiclabel);
+			i++;
+			}	
+		}
+	xmirror(xcenter){
+		var moreboxes = [];
+		var i=0;
+		while(i<this.srboxes.length){
+			var dx = this.srboxes[i].x-xcenter;
+			var mirrorcopy = this.srboxes[i].savecopy();
+			mirrorcopy.x = xcenter - dx;
+			moreboxes.push(mirrorcopy);
+			i++;
+			}
+		this.srboxes.push(...moreboxes);
+		
+		moreboxes = [];
+		var i=0;
+		while(i<this.mrboxes.length){
+			var dx = this.mrboxes[i].x-xcenter;
+			var mirrorcopy = this.mrboxes[i].savecopy();
+			mirrorcopy.x = xcenter - dx;
+			moreboxes.push(mirrorcopy);
+			i++;
+			}
+		this.mrboxes.push(...moreboxes);
+		//Not copying bullet boxes
+		var moreboxes = [];
+		var i=0;
+		while(i<this.bmboxes.length){
+			var dx = this.bmboxes[i].x-xcenter;
+			var mirrorcopy = this.bmboxes[i].savecopy();
+			mirrorcopy.x = xcenter - dx;
+			moreboxes.push(mirrorcopy);
+			i++;
+			}
+		this.bmboxes.push(...moreboxes);		
+		
+		var moreboxes = [];
+		var i=0;
+		while(i<this.mmboxes.length){
+			var dx = this.mmboxes[i].x-xcenter;
+			var mirrorcopy = this.mmboxes[i].savecopy();
+			mirrorcopy.x = xcenter - dx;  //Mirroring motion modifier
+			mirrorcopy.xdir = mirrorcopy.xdir * -1;
+			if ( mirrorcopy.xdir>0 ){ mirrorcopy.publiclabel = ">"; }
+			else if ( mirrorcopy.xdir<0 ){ mirrorcopy.publiclabel = "<";  }
+			moreboxes.push(mirrorcopy);
+			i++;
+			}
+		this.mmboxes.push(...moreboxes);
+			
+		var moreboxes = [];
+		var i=0;
+		while(i<this.itboxes.length){
+			var dx = this.itboxes[i].x-xcenter;
+			var mirrorcopy = this.itboxes[i].savecopy();
+			moreboxes.push(mirrorcopy);
+			i++;
+			}
+		this.itboxes.push(...moreboxes);
+		}
+	addline(x1,y1,x2,y2,stairnum,staircolor){ //Essentially a staircase of boxes, from point 1 to point 2.
+		//var stairnum = 32;
+		//var x1 = 4000;
+		//var y1 = -100;
+		//var x2 = 3500;
+		//var y2 = -900;
+		var dx = x2-x1;
+		var dy = y2-y1;
+		var stairdx = Math.floor(dx / stairnum);
+		var stairdy = Math.floor(dy / stairnum);
+		//var staircolor = "red";
+		var i=0;
+		while(i<stairnum){//this one works
+			var newbox = new Umb(stairdx*i+x1, stairdy*i+y1, Math.abs(stairdx)/2, Math.abs(stairdy)/2 ,0 ,1 );
+			newbox.c = staircolor;
+			this.srboxes.push(newbox);////constructor(xx,yy,xxs,yys,hp,solid)
+			//console.log(currentlevel.srboxes[currentlevel.srboxes.length-1]);
 			i++;
 			}	
 		}

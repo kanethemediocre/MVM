@@ -16,10 +16,18 @@
 <script type="text/javascript" src="cgmod.js"></script>
 <script type="text/javascript" src="level0.js"></script>
 <script type="text/javascript" src="level1.js"></script>
+<script type="text/javascript" src="level2.js"></script>
+<script type="text/javascript" src="level3.js"></script>
+<script type="text/javascript" src="level4.js"></script>
+<script type="text/javascript" src="level5.js"></script>
+<script type="text/javascript" src="level6.js"></script>
+<script type="text/javascript" src="level7.js"></script>
+<script type="text/javascript" src="level8.js"></script>
 <script type="text/javascript" src="level9.js"></script>
 <script type="text/javascript" src="keyboard.js"></script>
 <script type="text/javascript" src="mouse.js"></script>
 <script type="text/javascript" src="edithud.js"></script>
+<script type="text/javascript" src="portals.js"></script>
 <script>
 
 // declare global variables/////////////////////////////////////////////////
@@ -109,7 +117,22 @@ var savetestlist = savetestlevel.saveaslist();
 
 
 var currentlevel = new Warehouse(4000,4000,[],1,[],[]);//all these values are getting overridden
-currentlevel.restorefromlist(savetestlist);
+//currentlevel.restorefromlist(savetestlist);
+
+var portal0 = new Umb(200,-400,100,100,0,0);
+var portal1 = new Umb(200,-800,100,100,1,0);
+var portal2 = new Umb(200,-1200,100,100,2,0);
+var portal3 = new Umb(600,-400,100,100,3,0);
+var portal4 = new Umb(600,-800,100,100,4,0);
+var portal5 = new Umb(600,-1200,100,100,5,0);
+var portal6 = new Umb(1000,-400,100,100,6,0);
+var portal7 = new Umb(1000,-800,100,100,7,0);
+var portal8 = new Umb(1000,-1200,100,100,8,0);
+var portal9 = new Umb(600,-1500,100,100,9,0);
+var portals = [portal0,portal1,portal2,portal3,portal4,portal5,portal6,portal7,portal8,portal9];
+var levels = [loadlevel0(),loadlevel1(),loadlevel2(),loadlevel3(),loadlevel4(),loadlevel5(),loadlevel6(),loadlevel7(),loadlevel8(),loadlevel9()];
+var leveli = 0;
+currentlevel = levels[0];
 //var currentlevel = loadlevel0();//new Warehouse(4000,4000,[spawn0],1,[floor0,crate0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
 //currentlevel.bboxes = [bullet0];
 time = Math.floor((Date.now()/1000)*60);
@@ -123,26 +146,10 @@ function update() {
 	context.fillRect(0,0,canvas.width,canvas.height);
 	viewx = currentlevel.mrboxes[0].x-canvas.width/2;
 	viewy = currentlevel.mrboxes[0].y-canvas.height/2;
-	var myplayerbox = currentlevel.mrboxes[0] 
+	var myplayerbox = currentlevel.mrboxes[0] ;
+	
+	//portalcheck(myplayerbox);
 
-	//input taken in keyboard.js, handled here
-	/*
-	if (keyspressed.includes("`")){
-		editmode = !editmode;
-		}
-	if (keyspressed.includes("c")){
-		editcolori++;
-		if (editcolori>=editcolors.length){
-			editcolori = 0;
-			}
-		}
-	if (keyspressed.includes("b")){
-		//change box mode
-		}
-	if (keyspressed.includes("h")){
-		//change hp
-		}
-	*/
 	if (keyspressed.includes("w")){
 		if (myplayerbox.grounded){
 			var jump = 32;
@@ -182,6 +189,8 @@ function update() {
 	
 	currentlevel.updateall();
 	currentlevel.collideall();
+	
+	
 	//console.log(player0.y);
 	currentlevel.drawall(viewx,viewy);
 	if (editmode){

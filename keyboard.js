@@ -23,12 +23,6 @@ window.addEventListener("keydown", function (event) {
 			boxmodei = 0;
 			}
 		}
-	if (event.key=="s"){
-		console.log(currentlevel.saveaslist()+" ");
-		}
-	if (event.key=="l"){
-		console.log(currentlevel.srboxes[0].saveaslist()+" ");
-		}
 	if ((event.key=="+")||(event.key=="=")){
 		edithp++;
 		}
@@ -65,12 +59,17 @@ window.addEventListener("keydown", function (event) {
 			}
 		}
 	if (event.key=="v"){
-		if (boxmodei==1){
-			editsolid++;
-			if (editsolid>=3){
-				editsolid = 0;
-				}			
-			}
+		editsolid++;
+		if (editsolid>=3){
+			editsolid = 0;
+			}			
+		}
+	if (event.key=="l"){
+		leveli++;
+		if (leveli>=levels.length){
+			leveli = 0;
+			}			
+		currentlevel = levels[leveli];
 		}
 	if (event.key=="b"){
 		console.log(currentlevel.saveasjs());
