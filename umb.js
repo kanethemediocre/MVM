@@ -20,6 +20,30 @@ class Umb{
 		this.ydir = 0;
 		this.ai = "none";
 		}
+	bmfunc(g){
+		var s = g;
+		if (this.label == "*"){
+			//console.log("*tried");
+			s = s * this.hp;
+			}
+		else if (this.label == "/"){
+			var result = s/ this.hp;
+			if (result==Math.floor(result)){//division successful!
+				s = result;
+				}
+			else{
+				s = 0;
+				}
+			}
+		else if (this.label == "+"){
+			s = s + this.hp;
+			}
+		else if (this.label == "-"){
+			s = s - this.hp;
+			//if (s<0){s = 0;}
+			}
+		return s;
+		}
 	saveaslist(){
 		return [this.x,this.y,this.vx,this.vy,this.xs,this.ys,this.hp,this.maxhp,this.timer,this.maxtimer,this.solid,this.c,this.label,this.publiclabel,this.lc,this.grounded,this.xdir,this.ydir,this.ai];
 		}

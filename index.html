@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"> 
-    <title>MVM0 </title>
+    <title>MVM0015 </title>
     <style></style>
 	   <link rel="shortcut icon" href="favicon.ico" >
    <link rel="icon" type="image/gif" href="animated_favicon1.gif" >
@@ -99,7 +99,7 @@ window.mobileAndTabletCheck = function() {//stolen via stackoverflow allegedly f
 	var editcolors = ["red","orange","yellow","green","blue","purple","white","black"];
 	var editcolori = 0;
 	var boxmodei = 0;
-	var boxmodes = ["Terrain","Enemy","Bullet Modifier","Motion Modifier","Item","Terrain Line","Delete"];
+	var boxmodes = ["Terrain","Enemy","Bullet Modifier","Motion Modifier","Item","Staircase","Delete"];
 	var edithp = 4;
 	var editoperatori = 0;
 	var editoperators = ["+","-","*","/","^"];
@@ -131,8 +131,89 @@ var portal8 = new Umb(1000,-1200,100,100,8,0);
 var portal9 = new Umb(600,-1500,100,100,9,0);
 var portals = [portal0,portal1,portal2,portal3,portal4,portal5,portal6,portal7,portal8,portal9];
 var levels = [loadlevel0(),loadlevel1(),loadlevel2(),loadlevel3(),loadlevel4(),loadlevel5(),loadlevel6(),loadlevel7(),loadlevel8(),loadlevel9()];
+//levels[4].addrandompuzzlemodn(0,-1000,4,300,[2],[1,2,3,4],["+","-","*","/"]);
+//levels[4].srboxes.push(new Umb(-1000,-700,4000,50,0,1));//constructor(xx,yy,xxs,yys,hp,solid){
 var leveli = 0;
 currentlevel = levels[0];
+
+
+
+//mods are a list of functions
+//single row of N bullet mods
+function solvenmod(g,modboxes,pos){
+	var failure = false;
+	var s = g;//solution
+	var i=pos;
+	while(i<modboxes.length){
+		s = modboxes[i].bmfunc(s);
+		if (s<=0){ failure = true;}
+		i++;
+		}
+	if (failure){s = -1}
+	return s
+	}
+//2 rows of N bullet mods
+function solven2mod(g,modboxes,pos){
+	var s = g;//solution
+	var i=0;
+	if (pos%2==0){//bottom row
+		i = pos/2;
+		}
+	else{//top row
+		i = (pos-1)/2
+		}
+	while(i<modboxes.length){
+		s = modboxes[i].bmfunc(s);
+		i=i+2;
+		}
+	return s;
+	}
+//single row of N bullet mods with bounce
+function solvenmodb(g,modboxes,pos){
+	var s = g;
+	var i = pos;
+	while(i<modboxes.length){
+		s = modboxes[i].bmfunc(s);
+		i++;
+		}
+	while(i<modboxes.length*2){
+		s = modboxes[2*modboxes.length-i-1].bmfunc(s);
+		i++;
+		}
+	return s;
+	}
+//2 rows of N bullet mods with bounce
+function solven2modb(g,modboxes,pos){
+	var s = g;
+	var i=0;
+	if (pos%2==0){//bottom row
+		i = pos/2;
+		}
+	else{//top row
+		i = (pos-1)/2
+		}
+	while(i<modboxes.length){
+		s = modboxes[i](s);
+		i=i+2;
+		}
+	while(i<modboxes.length*2){
+		s = modboxes[2*modboxes.length-i-1].bmfunc(s);
+		i=i+2;
+		}
+	return s;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 //var currentlevel = loadlevel0();//new Warehouse(4000,4000,[spawn0],1,[floor0,crate0],[player0,enemy0]);//constructor(xxs,yys,spawns,gravity,srboxes,mrboxes){
 //currentlevel.bboxes = [bullet0];
 time = Math.floor((Date.now()/1000)*60);

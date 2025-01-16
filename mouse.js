@@ -71,9 +71,10 @@ function mouseUpHandler(e) {
 			newbox.publiclabel = edititems[edititemi];//make this better, public facing description
 			currentlevel.itboxes.push(newbox);
 			}
-		else if (boxmodei==5){
-			var numstairs = Math.abs(edity1-edity2)/24; //differency in height divided by 24 pixels per stair
-			currentlevel.addline(editx1,edity1,editx2,edity2,numstairs,editcolors[editcolori]);
+		else if (boxmodei==5){//Stairs
+			var stairnum = Math.floor(Math.abs(edity1-edity2)/16)+1;
+			currentlevel.addline(editx1,edity1,editx2,edity2,stairnum,editcolors[editcolori]);
+			
 			}
 		else if (boxmodei==6){//This is delete mode
 			var i=0;

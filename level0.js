@@ -21,8 +21,43 @@ function loadlevel0(){
 		var enemy0 = new Umb(100,-120,40,100,4,1);
 		enemy0.c = "red";
 		enemy0.publiclabel = enemy0.hp;
+		
 		i++;
 		}
+	
+	function level0wallpuzzle0(level,x,y){
+		var numwalls = 4;
+		var floor00 = new Umb(x,y,2048,64,0,1);
+		level.srboxes.push(floor00);
+		var numwalls = 4;
+		var i=0;
+		while(i<numwalls){
+			var awall = new Umb(x+512+80*i,-50,50,200,8,1);
+			awall.c = "grey";
+			awall.publiclabel = awall.hp;
+			level.mrboxes.push(awall);
+			i++;
+			}
+		}
+	function level0wallpuzzle1(level,x,y){
+		var numwalls = 4;
+		var floor01 = new Umb(x,y,64,2048,0,1);
+		var barrier0 = new Umb(x+1024,y-256,32,2048,0,1);
+		var platform0 = new Umb(x+1024,y-256,32,2048,0,1);
+		level.srboxes.push(floor00);
+		var numwalls = 4;
+		var i=0;
+		while(i<numwalls){
+			var awall = new Umb(x+512+80*i,-50,50,200,8,1);
+			awall.c = "grey";
+			awall.publiclabel = awall.hp;
+			level.mrboxes.push(awall);
+			i++;
+			}
+		}
+		
+		
+	
 	
 	
 	var bullet0 = new Umb(200,400,16,16,1,1);

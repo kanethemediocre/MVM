@@ -212,6 +212,7 @@ class Warehouse{
 	collideall(){
 		var i=0;
 		while(i<this.mrboxes.length){//Check all moving rigid boxes (mostly characters)
+			//console.log("collidemrboxes");
 			var j=0;
 			this.mrboxes[i].grounded = false;
 			while(j<this.srboxes.length){//against all static rigid boxes (walls, terrain)
@@ -227,6 +228,46 @@ class Warehouse{
 					}
 				j++;
 				}
+			var j=i+1;
+			//console.log(this.mrboxes.length);
+			//console.log(this.mrboxes[i].solid);
+			while((j<this.mrboxes.length)&&(this.mrboxes[i].solid>0)){//check moving rigid boxes against each other, if they are both solid
+				//console.log("itriedtocollidemrmr");
+				if (this.mrboxes[j].solid>0) {
+					var totalxs = this.mrboxes[i].xs+this.mrboxes[j].xs;
+					var dx = this.mrboxes[i].x-this.mrboxes[j].x;
+					if (Math.abs(dx)<totalxs){
+						var totalys = this.mrboxes[i].ys+this.mrboxes[j].ys;
+						var dy = this.mrboxes[i].y-this.mrboxes[j].y;
+						if (Math.abs(dy)<totalys){//A collision happened!
+							this.mrboxes[i].terraincollide(this.mrboxes[j]);
+							//Some kind of collision goes here
+							}
+						}
+					}
+				
+				j++;
+				}
+
+			var j=0;
+			while(j<this.bboxes.length){//against all static rigid boxes (walls, terrain)
+				var totalxs = this.mrboxes[i].xs+this.bboxes[j].xs;
+				var dx = this.mrboxes[i].x-this.bboxes[j].x;
+				if (Math.abs(dx)<totalxs){
+					var totalys = this.mrboxes[i].ys+this.bboxes[j].ys;
+					var dy = this.mrboxes[i].y-this.bboxes[j].y;
+					if (Math.abs(dy)<totalys){//bullet hits character
+						this.mrboxes[i].hp = this.mrboxes[i].hp - this.bboxes[j].hp;
+						this.mrboxes[i].publiclabel = this.mrboxes[i].hp;
+						this.bboxes[j].hp = 0;
+						}
+					}
+				j++;
+				}	
+
+
+
+			
 			var j=0;
 			while(j<this.bboxes.length){//against all static rigid boxes (walls, terrain)
 				var totalxs = this.mrboxes[i].xs+this.bboxes[j].xs;
@@ -540,4 +581,108 @@ class Warehouse{
 			i++;
 			}
 		}
+	addpuzzlemodn(x,y,gap,g,pos,modboxes){//For a single row of bullet modifiers
+		var modx = 0;
+		var mody = 0;
+		var i=0;
+		while(i<modboxes.length){
+			modboxes[i].x = x-(modboxes.length-i)*gap;
+			modboxes[i].y = y;
+			modboxes[i].xs = 64;
+			modboxes[i].ys = 64;
+			modboxes[i].c = "red";
+			this.bmboxes.push(modboxes[i]);
+			i++;
+			}
+		var solutionbox = new Umb(x, y, 128, 128 ,solvenmod(g,modboxes,pos),1 );
+		solutionbox.publiclabel = solutionbox.hp;
+		solutionbox.c = "purple";
+		this.mrboxes.push(solutionbox);
+		return solutionbox.hp;
+		}
+	addrandompuzzlemodn(x,y,n,gap,gs,nums,ops){
+		var q=0;
+		var solution = 0;
+		while((q<100)&&(solution<=0)){
+			var g = gs[Math.floor(Math.random()*gs.length)];
+			var pos = Math.floor(Math.random()*(n+1));
+			if (pos==n){var pos = Math.floor(Math.random()*(n+1));}
+			var i=0;
+			var modboxes = []
+			while(i<n){
+				var pnum=nums[Math.floor(Math.random()*nums.length)];
+				var pop=ops[Math.floor(Math.random()*ops.length)];
+				var amodbox = new Umb(x, y, 64, 64 ,pnum,1 );
+				amodbox.label = pop;
+				amodbox.publiclabel = pop+pnum;
+				modboxes.push(amodbox);
+				i++;
+				}
+			solution = solvenmod(g,modboxes,pos)
+			q++;
+			}
+		if (q==100){console.log("mod n puzzle solution out of bounds 100 times");}
+		this.addpuzzlemodn(x,y,gap,g,pos,modboxes);	
+		}
+	addpuzzlemod2n(x,y,gap,g,pos,modboxes){//for 2 separate rows of bullet mods
+		var i=0;
+		while(i<modboxes.length){
+			modboxes[i].x = x-(modboxes.length-i)*gap/2;
+			modboxes[i].y = y;
+			modboxes[i].xs = 64;
+			modboxes[i].ys = 64;
+			modboxes[i].c = "red";
+			this.bmboxes.push(modboxes[i]);
+			i=i+2;
+			}
+		var i=1;
+		while(i<modboxes.length){
+			modboxes[i].x = x+(modboxes.length-i+1)*gap/2; //This assumes row is on opposite side, but positions will be overridden and may instead be above
+			modboxes[i].y = y;//+gap;
+			modboxes[i].xs = 64;
+			modboxes[i].ys = 64;
+			modboxes[i].c = "red";
+			this.bmboxes.push(modboxes[i]);
+			i=i+2;
+			}
+		var solutionbox = new Umb(x, y, 128, 128 ,solven2mod(g,modboxes,pos),1 );
+		solutionbox.publiclabel = solutionbox.hp;
+		solutionbox.c = "purple";
+		this.mrboxes.push(solutionbox);
+		return solutionbox.hp;
+		}
+	
+	addrandompuzzlemod2n(x,y,n,gap,gs,nums,ops){
+		var q=0;
+		var solution = 0;
+		while((q<100)&&(solution<=0)){
+			var g = gs[Math.floor(Math.random()*gs.length)];
+			var pos = Math.floor(Math.random()*(n+1));
+			if (pos==n){var pos = Math.floor(Math.random()*(n+1));}
+			var i=0;
+			var modboxes = []
+			while(i<n){
+				var pnum=nums[Math.floor(Math.random()*nums.length)];
+				var pop=ops[Math.floor(Math.random()*ops.length)];
+				var amodbox = new Umb(x, y, 64, 64 ,pnum,1 );
+				amodbox.label = pop;
+				amodbox.publiclabel = pop+pnum;
+				modboxes.push(amodbox);
+				i++;
+				}
+			solution = solven2mod(g,modboxes,pos)
+			q++;
+			}
+		if (q==100){console.log("mod n2 puzzle solution out of bounds 100 times");}
+		this.addpuzzlemod2n(x,y,gap,g,pos,modboxes);	
+		}
+
+
+
+
+
+
+
+
+
 	}
